@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.com.imad</groupId>
+    <groupId>org.com.asma</groupId>
     <artifactId>Restaurant</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
