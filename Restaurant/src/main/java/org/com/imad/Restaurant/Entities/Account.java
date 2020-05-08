@@ -28,6 +28,8 @@ public class Account {
 	private String password;
 	@Column(name="email")
 	private String email;
+	@Column(name="role")
+	private String role;
 	@Column(name = "status")
 	private boolean activated;
 	@CreationTimestamp
@@ -98,6 +100,16 @@ public User getUser() {
 
 public void setUser(User user) {
 	this.user = user;
+}
+
+
+public String getRole() {
+	return role;
+}
+
+
+public void setRole(String role) {
+	this.role = role;
 }
 
 }

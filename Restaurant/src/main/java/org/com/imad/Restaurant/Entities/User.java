@@ -3,8 +3,11 @@ package org.com.imad.Restaurant.Entities;
 import java.math.BigInteger;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,28 +34,23 @@ public class User implements Principal{
 	@Column(name="first_name")
 	private String firstName;
 		@Column(name="last_name")
-	private String latName;
-	
+	private String lastName;
 		@Column(name="phone")
-	private Integer phone;
+	private String phone;
 		@Column(name="street")
 	private String street;
 		@Column(name="city")
 	private String city;
-		@Column(name="state")
-	private String state;
-		@Column(name="zip_code")
-	private Integer zipCode;
 		@CreationTimestamp
 	    private LocalDateTime createDateTime;
 	    @UpdateTimestamp
 	    private LocalDateTime updateDateTime;
-		@OneToOne(mappedBy = "user",fetch = FetchType.EAGER)
+		@OneToOne(mappedBy = "user",fetch = FetchType.EAGER,orphanRemoval = true, cascade = CascadeType.REMOVE)
 	private Account account;
-		@OneToMany(mappedBy="user" ,fetch = FetchType.EAGER)
+		@OneToMany(mappedBy="user" ,fetch = FetchType.EAGER,orphanRemoval = true, cascade = CascadeType.REMOVE)
 	private List<Order> orders;
 		public User() {
-			
+			orders=new ArrayList<Order>();
 		}
 		public String getFirstName() {
 			return firstName;
@@ -60,17 +58,18 @@ public class User implements Principal{
 		public void setFirstName(String firstName) {
 			this.firstName = firstName;
 		}
-		public String getLatName() {
-			return latName;
-		}
-		public void setLatName(String latName) {
-			this.latName = latName;
-		}
+		
 	
-		public Integer getPhone() {
+		public String getLastName() {
+			return lastName;
+		}
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
+		public String getPhone() {
 			return phone;
 		}
-		public void setPhone(Integer phone) {
+		public void setPhone(String phone) {
 			this.phone = phone;
 		}
 		public String getStreet() {
@@ -85,18 +84,7 @@ public class User implements Principal{
 		public void setCity(String city) {
 			this.city = city;
 		}
-		public String getState() {
-			return state;
-		}
-		public void setState(String state) {
-			this.state = state;
-		}
-		public Integer getZipCode() {
-			return zipCode;
-		}
-		public void setZipCode(Integer zipCode) {
-			this.zipCode = zipCode;
-		}
+	
 		public Account getAccount() {
 			return account;
 		}
@@ -135,9 +123,13 @@ public class User implements Principal{
 		}
 		@Override
 		public String toString() {
-			return "User [username=" + username + ", firstName=" + firstName + ", latName=" + latName  + ", phone=" + phone + ", street=" + street + ", city=" + city + ", state=" + state
-					+ ", zipCode=" + zipCode + ", account=]";
+			return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", phone="
+					+ phone + ", street=" + street + ", city=" + city + ", createDateTime=" + createDateTime
+					+ ", updateDateTime=" + updateDateTime + ", account=" + account + ", orders=" + orders + "]";
 		}
+	
+	
+		
 	
 	
 }

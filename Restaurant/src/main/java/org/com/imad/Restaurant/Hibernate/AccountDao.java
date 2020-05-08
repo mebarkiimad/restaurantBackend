@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.com.imad.Restaurant.Entities.Account;
 import org.com.imad.Restaurant.Entities.Menu;
+import org.com.imad.Restaurant.Entities.Order;
 import org.com.imad.Restaurant.Entities.User;
 public class AccountDao {
 	
@@ -56,6 +57,7 @@ public List<Account> getAllAccounts() {
 	
 }
 public Account updateAccount(String username,Account account) {
+	
 	Account updateaccount=this.getAccount(username);
 	updateaccount.setActivated(account.isActivated());
 	updateaccount.setPassword(account.getPassword());
@@ -102,6 +104,7 @@ public Account saveAccount(Account account) {
 }
 
 public void deleteAccount(String username) {
+	Query query;
 	Session session=HibernateUtility.getSessionFactory().openSession();
 	Transaction tx = null;
 	try {
@@ -119,7 +122,12 @@ catch (Exception e) {
 }finally {
    session.close();
 }
-
+UserDao userDao=new UserDao();
+userDao.deleteUser(username);
+	
+	
+	
+	
 }
 public boolean existsUsername(String data) {
 	Session session=HibernateUtility.getSessionFactory().openSession();

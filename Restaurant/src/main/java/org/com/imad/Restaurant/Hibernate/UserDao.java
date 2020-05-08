@@ -71,12 +71,12 @@ public class UserDao {
 	public User updateAccount(String username,User user) {
 		User updateUser=this.getUser(username);
 		updateUser.setFirstName(user.getFirstName());
-		updateUser.setLatName(user.getLatName());
+		updateUser.setLastName(user.getLastName());
 		updateUser.setCity(user.getCity());
 		updateUser.setPhone(user.getPhone());
-		updateUser.setState(user.getState());
+	
 		updateUser.setStreet(user.getStreet());
-		updateUser.setZipCode(user.getZipCode());
+	
 		Session session=HibernateUtility.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {

@@ -49,14 +49,17 @@ public class UserRessource {
 		public Response updateUser(@PathParam("username") String username,User user,@Context SecurityContext securityContext) {
 			 Principal principal = securityContext.getUserPrincipal();
 		      String userName= principal.getName();
+		
 			return userService.updateUser(userName, user);
 		}
 		@DELETE
+		@Logged
 		@Path("/{username}")
 		public Response deleteUser(@PathParam("username") String username,@Context SecurityContext securityContext) {
 			Principal principal = securityContext.getUserPrincipal();
 		      String userName= principal.getName();
-			return  userService.deleteUser(username);
+			
+			return  userService.deleteUser(userName);
 		}
 	
 }

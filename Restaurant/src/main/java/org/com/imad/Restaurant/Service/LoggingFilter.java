@@ -36,6 +36,7 @@ public class LoggingFilter implements ContainerRequestFilter, ContainerResponseF
          }
          String authToken=getAuthToken(authorizationHeader);
          String decodeAuthToken=Base64.base64Decode(authToken);
+         System.out.println(decodeAuthToken);
          StringTokenizer tokenizer=new StringTokenizer(decodeAuthToken,":");
          String username=tokenizer.nextToken();
          String password=tokenizer.nextToken();

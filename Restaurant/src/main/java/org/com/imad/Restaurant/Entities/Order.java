@@ -1,9 +1,11 @@
 package org.com.imad.Restaurant.Entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,15 +20,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name="orders")
 @XmlRootElement
-public class Order {
+public class Order{
+	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "order_id", updatable = false, nullable = false)
-	@Id 
 public int orderId;
 	@Column(name = "total_amount")
 public int totalAmount;
@@ -36,24 +40,40 @@ public int totalAmount;
     private LocalDateTime updateDateTime;
     @XmlTransient
     @JsonbTransient
+   
 	@ManyToOne
 	@JoinColumn(name="user_name")
 	private User user;
-	@OneToMany(mappedBy="order" ,fetch = FetchType.EAGER)
-	private List<OrderItem> orderItems;
-public Order() {}
-public int getOrderId() {
-	return orderId;
+	@OneToMany(mappedBy="order" ,fetch = FetchType.EAGER,orphanRemoval = true, cascade = CascadeType.REMOVE)
+	private List<OrderItem> orderItems=new ArrayList<OrderItem>();;
+public Order() {
+	
 }
-public void setOrderId(int orderId) {
-	this.orderId = orderId;
+
+public Order(int totalAmount, User user, List<OrderItem> orderItems) {
+	
+
+	this.totalAmount = totalAmount;
+	this.user = user;
+	this.orderItems = orderItems;
 }
-public int getTotalAmount() {
+
+public int gettotalamount() {
 	return totalAmount;
 }
+
 public void setTotalAmount(int totalAmount) {
 	this.totalAmount = totalAmount;
 }
+
+public int getorderid() {
+	return orderId;
+}
+
+public void setOrderId(int orderId) {
+	this.orderId = orderId;
+}
+
 public LocalDateTime getCreateDateTime() {
 	return createDateTime;
 }

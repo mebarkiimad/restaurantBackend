@@ -146,6 +146,30 @@ public class MealDao implements Dao<Meal> {
 	}
 		
 	}
+public Meal getMealForOrder(int id) {
+	Session session=HibernateUtility.getSessionFactory().openSession();
+	Meal meal =null;
+	Transaction tx = null;
+	try {
+	   tx = session.beginTransaction();
+	   
+	   int mealid=id;
+	   Query query=session.createQuery("select meal from Meal as meal  where meal.mealId=:mealid");
 
+	   query.setParameter("mealid", mealid);
+	   meal=(Meal)query.uniqueResult();
+		tx.commit();
+		session.close();
+	}
+	catch (Exception e) {
+	   if (tx!=null) tx.rollback();
+	   e.printStackTrace(); 
+	}finally {
+	   session.close();
+	}
+	 return meal;
+	
+	
+}
 
 }

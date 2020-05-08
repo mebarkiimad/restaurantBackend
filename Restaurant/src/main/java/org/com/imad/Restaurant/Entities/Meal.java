@@ -144,6 +144,13 @@ public void setImagePath(String imagePath) {
 	this.imagePath = imagePath;
 }
 
+@Override
+public String toString() {
+	return "Meal [mealId=" + mealId + ", quantity=" + quantity + ", mealName=" + mealName + ", unitPrice=" + unitPrice
+			+ ", discount=" + discount + ", imagePath=" + imagePath + ", createDateTime=" + createDateTime
+			+ ", updateDateTime=" + updateDateTime + ", menuItem=" + menuItem + ", orderItems=" + orderItems + "]";
+}
+
 }
 
 

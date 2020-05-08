@@ -43,6 +43,7 @@ private int quantity;
 	@JoinColumn(name="order_id")
 	private Order order;
 	public OrderItem() {}
+	
 	public int getOrderItemId() {
 		return orderItemId;
 	}

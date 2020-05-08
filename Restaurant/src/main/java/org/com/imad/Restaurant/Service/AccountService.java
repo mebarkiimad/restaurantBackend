@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 
@@ -36,7 +37,7 @@ public Response saveAccount(Account account,UriInfo uriInfo){
 	URI uri=null;
 	createdAccount= accountDao.saveAccount(account);
 	uri=uriInfo.getAbsolutePathBuilder().path(account.getUsername()).build();
-	return Response.created(uri).entity(createdAccount).build();	
+	return Response.status(Status.ACCEPTED).entity(createdAccount).build();	
 }
 public Response updateAccount(String username,Account account) {
 	Account accountEntity= accountDao.updateAccount(username,account);
