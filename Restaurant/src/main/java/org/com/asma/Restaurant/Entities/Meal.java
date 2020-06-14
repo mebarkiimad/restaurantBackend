@@ -55,7 +55,7 @@ public Meal() {}
 public Meal(int quantity, String mealName, int  unitPrice, int discount, MenuItem menuItem) {
 	this.quantity = quantity;
 	this.mealName = mealName;
-	this. unitPrice =  unitPrice;
+	this.unitPrice =unitPrice;
 	this.discount = discount;
 	this.menuItem = menuItem;
 }
